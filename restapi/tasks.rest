@@ -1,3 +1,27 @@
-### Get all the tasks
-GET http://localhost:3000/tasks
+# Variables
+@baseUrl = http://localhost:3000/tasks
+@taskNo = {{$randomInt 100 999}}
+@id = {{create.response.body.id}}
 
+### Get all the tasks
+GET {{baseUrl}}/
+
+### Create a new Task
+# @name create
+POST {{baseUrl}} HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+title=Task+{{taskNo}}
+&description=A+{{taskNo}}+task.
+
+### Get a specific Task
+GET {{baseUrl}}/{{id}}
+
+### Delete a specific task
+DELETE {{baseUrl}}/{{id}} HTTP/1.1
+
+### Update a specific task
+PATCH {{baseUrl}}/{{id}}
+Content-Type: application/x-www-form-urlencoded
+
+&status=IN_PROGRESS
